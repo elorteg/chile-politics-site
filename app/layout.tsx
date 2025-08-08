@@ -1,31 +1,30 @@
+**Found the problem!** Your layout is trying to import `geist/font/sans` and `geist/font/mono` which aren't installed, causing the deployment to fail.
+
+## **🔧 Quick Fix: Replace the Layout**
+
+1. Go to `app/layout.tsx` in GitHub
+2. Click the **pencil icon** to edit
+3. **Delete everything** and replace with this simpler version:
+
+
+```typescriptreact
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Pulso Nacional - Política Chile',
+  description: 'Agregador de noticias y encuestas políticas de Chile',
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
-      <head>
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-        `}</style>
-      </head>
-      <body>{children}</body>
+    <html lang="es">
+      <body className="font-sans antialiased">{children}</body>
     </html>
   )
 }
+```
